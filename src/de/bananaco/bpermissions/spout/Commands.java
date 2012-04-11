@@ -23,8 +23,8 @@ public class Commands {
 	private String name = null;
 	
 	protected Commands() {
-		if(Spout.getGame().getWorlds().size() == 1)
-			world = instance.getWorld(Spout.getGame().getWorlds().iterator().next().getName());
+		if (Spout.getEngine().getWorlds().size() == 1)
+			world = instance.getWorld(Spout.getEngine().getWorlds().iterator().next().getName());
 	}
 	
 	protected String format(String message) {

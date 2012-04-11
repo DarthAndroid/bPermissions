@@ -2,6 +2,7 @@ package de.bananaco.bpermissions.imp;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -223,6 +224,14 @@ public class YamlWorld extends World {
 		gconfig.set("default", def);
 
 		Set<Calculable> usr = getAll(CalculableType.USER);
+		// don't save users that are in the default group with no custom permissions
+		Iterator<Calculable> userItr = usr.iterator();
+		while (userItr.hasNext()) {
+			Calculable user = userItr.next();
+			// remove users where group = [default group] and there are no custom permissions
+			if (user.getGroupsAsString().contains(def) && user.getGroupsAsString().size() == 0 && user.getPermissions().size() == 0)
+				userItr.remove();
+		}
 		// Sort them :D
 		List<Calculable> users = new ArrayList<Calculable>(usr);
 		MetaData.sort(users);

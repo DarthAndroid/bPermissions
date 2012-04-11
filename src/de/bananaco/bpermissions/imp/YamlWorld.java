@@ -229,7 +229,7 @@ public class YamlWorld extends World {
 		while (userItr.hasNext()) {
 			Calculable user = userItr.next();
 			// remove users where group = [default group] and there are no custom permissions
-			if (user.getGroupsAsString().contains(def) && user.getGroupsAsString().size() == 0 && user.getPermissions().size() == 0)
+			if (user.getGroupsAsString().contains(def) && user.getGroupsAsString().size() == 1 && user.getPermissions().size() == 0)
 				userItr.remove();
 		}
 		// Sort them :D
